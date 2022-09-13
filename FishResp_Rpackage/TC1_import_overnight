@@ -1,0 +1,44 @@
+################################################
+# TEST CASE 1: Typical input for import.meas() #
+################################################
+#
+# DESCRIPTION: 
+# The import.meas() function should be able to work with an input file in the
+# FishResp format without any issues. To test it, the 'TD_FishResp_overnight.txt'
+# file is used, containing data collected overnight.
+#
+# ENVIRONMENT SETUP:
+# 1. R, version > 4.0.0
+# 2. R package 'FishResp', !!! the version under test !!!
+# 3. The 'TD1_FishResp_overnight.txt' file having no issues (from 10 AM to 7 AM)
+#
+# TEST EXECUTION:
+# 1. Open R
+# 2. Load the library under test 'FishResp'
+library(FishResp)
+# 3. Run the function import.info():
+info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
+		   Mass = c(1.0, 1.0, 1.0, 1.0), 
+                   Volume = c(100, 100, 100, 100),
+                   DO.unit = 'mg/L')
+# 4. Run the function import.meas() with the 'test_data_overnight.txt' file:
+meas.data <- import.meas(file = "TD_FishResp_overnight.txt",
+                         info.data = info,
+                         logger = "FishResp",
+                         n.chamber = 4,
+                         date.format = "DMY",
+                         plot.temperature = TRUE,
+                         plot.oxygen = TRUE,
+                         start.measure = "10:00:00",
+                         stop.measure = "07:00:00")
+# 5. Check visually that the plots have actual data for Temperature and DO (manual)
+# 6. Extract dimensions of the 'meas.data' dataset into the object 'TC1_output':
+TC1_output <- dim(meas.data)
+
+# EXIT CRITERIA:
+# If TC1_output == c(45600, 16): PASSED
+# If error message, no TC1_output, TC1_output != c(45600, 16) or overtime: FAILED
+
+# TEAR DOWN:
+# close R
+q()
