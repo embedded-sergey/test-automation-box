@@ -36,8 +36,9 @@ TC1.meas.data <- import.meas(file = "TD_FishResp_overday.txt",
 TC1_output <- dim(TC1.meas.data)
 
 # EXIT CRITERIA:
-# If all(TC1_output == c(53700, 16)): PASSED
-# If not, or no TC1_output, or error messages, or overtime: FAILED
+# if TRUE, them PASSED:
+all(TC1_output == c(53700, 16))
+# if not, or no TC1_output, or error messages, or overtime: FAILED
 
 # TEAR DOWN:
 # close R

@@ -30,15 +30,16 @@ TC3.meas.data <- import.meas(file = "TD_FishResp_multinight.txt",
                              date.format = "DMY",
                              plot.temperature = TRUE,
                              plot.oxygen = TRUE,
-                             start.measure = "10:00:00",
-                             stop.measure = "10:00:00")
+                             start.measure = "00:00:00",
+                             stop.measure = "23:00:00")
 # 5. Check visually that the plots have actual data for Temperature and DO (manual)
 # 6. Extract dimensions of the 'TC3.meas.data' dataset into the object 'TC3_output':
 TC3_output <- dim(TC3.meas.data)
 
 # EXIT CRITERIA:
-# If all(TC3_output == c(101098, 16)): PASSED
-# If not, or no TC3_output, or error messages, or overtime: FAILED
+# if TRUE, them PASSED:
+all(TC3_output == c(101100, 16))
+# if not, or no TC3_output, or error messages, or overtime: FAILED
 
 # TEAR DOWN:
 # close R
