@@ -21,7 +21,7 @@ TC2.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
 		       Mass = c(1.0, 1.0, 1.0, 1.0), 
                        Volume = c(100, 100, 100, 100),
                        DO.unit = 'mg/L')
-# 4. Run the function import.meas() with the 'test_data_overnight.txt' file:
+# 4. Run the function import.meas() with the 'FishResp_overnight.txt' file:
 TC2.meas.data <- import.meas(file = "data/FishResp_overnight.txt",
                              info.data = TC2.info,
                              logger = "FishResp",

@@ -22,7 +22,7 @@ TC3.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
 		       Mass = c(1.0, 1.0, 1.0, 1.0), 
                        Volume = c(100, 100, 100, 100),
                        DO.unit = "mg/L")
-# 4. Run the function import.meas() with the 'test_data_multinight.txt' file:
+# 4. Run the function import.meas() with the 'FishResp_multinight.txt' file:
 TC3.meas.data <- import.meas(file = "data/FishResp_multinight.txt",
                              info.data = TC3.info,
                              logger = "FishResp",
