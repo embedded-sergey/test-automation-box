@@ -1,0 +1,49 @@
+##########################################################
+# TEST CASE 5: Overnight input with NA for import.meas() #
+##########################################################
+#
+# DESCRIPTION: 
+# The import.meas() function should be able to work with any NA data in the
+# input file of the FishResp format. To test it, the 'FishResp_overnight_NA.txt'
+# file is used, containing data with inserted NA values in various locations.
+#
+# ENVIRONMENT SETUP:
+# 1. R, version > 4.0.0
+# 2. R package 'FishResp', !!! the version under test !!!
+# 3. The 'FishResp_overnight.txt' file that contains inserted NA:
+#	Ox.1 in M1 - all data NA
+# 	Temp.2 in M2 - all data NA
+#	Ox.3 in M3 - some NA in beginning, middle, and end
+#	Temp.4 in M4 - some NA in beginning, middle, and end
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M5 - some NA
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M6 - all NA
+#
+# TEST EXECUTION:
+# 1. Open R
+# 2. Load the library under test 'FishResp'
+library(FishResp)
+# 3. Run the function import.info():
+TC5.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
+		       Mass = c(1.0, 1.0, 1.0, 1.0), 
+                       Volume = c(100, 100, 100, 100),
+                       DO.unit = "mg/L")
+# 4. Run the function import.meas() with the 'test_data_overnight_NA.txt' file:
+TC5.meas.data <- import.meas(file = "data/FishResp_overnight_NA.txt",
+                             info.data = TC5.info,
+                             logger = "FishResp",
+                             n.chamber = 4,
+                             date.format = "DMY",
+                             plot.temperature = TRUE,
+                             plot.oxygen = TRUE)
+# 5. Check visually that the plots have actual data for Temperature and DO (manual)
+# 6. Extract dimensions of the 'TC5.meas.data' dataset into the object 'TC5_output':
+TC5.output <- dim(TC5.meas.data)
+
+# EXIT CRITERIA
+# if TRUE, then PASSED:
+all(TC5.output == c(47100, 16))
+# else: FAILED
+
+# TEAR DOWN:
+# close R
+q(save = "no")

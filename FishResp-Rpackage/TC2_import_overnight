@@ -1,6 +1,6 @@
-##########################################################
-# TEST CASE 2: Typical input overnight for import.meas() #
-##########################################################
+##################################################
+# TEST CASE 2: Overnight input for import.meas() #
+##################################################
 #
 # DESCRIPTION: 
 # The import.meas() function should be able to work with an input file in the

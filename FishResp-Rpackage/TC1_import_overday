@@ -1,6 +1,6 @@
-#########################################################
-# TEST CASE 1: FishResp input overday for import.meas() #
-#########################################################
+################################################
+# TEST CASE 1: Overday input for import.meas() #
+################################################
 #
 # DESCRIPTION: 
 # The import.meas() function should be able to work with an input file in the
