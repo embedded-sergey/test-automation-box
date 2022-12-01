@@ -10,7 +10,7 @@
 # ENVIRONMENT SETUP:
 # 1. R, version > 4.0.0
 # 2. R package 'FishResp', !!! the version under test !!!
-# 5. The 'FishResp_overnight_noline.txt' file containing missed lines/phases:
+# 3. The 'FishResp_overnight_noline.txt' file containing missed lines/phases:
 #	all columns in M7 - some lines are missing in beginning, middle and end
 #	all columns in M8 - all lines are missing
 #	all columns in M9 - one line is presented
