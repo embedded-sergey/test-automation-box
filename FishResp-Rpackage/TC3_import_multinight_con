@@ -1,0 +1,44 @@
+##############################################################
+# TEST CASE 3: Continuous multinight input for import.meas() #
+##############################################################
+#
+# DESCRIPTION: 
+# The import.meas() function should be able to work with an input file in the
+# FishResp format without any issues. To test it, the 'FishResp_multinight.txt'
+# file is used, containing data collected during two nights. It should work in a 
+# continuous mode, i.e. non-stop measurements during the whole experiment.
+#
+# ENVIRONMENT SETUP:
+# 1. R, version > 4.0.0
+# 2. R package 'FishResp', !!! the version under test !!!
+# 3. The 'FishResp_multinight.txt' file having no issues
+#
+# TEST EXECUTION:
+# 1. Open R
+# 2. Load the library under test 'FishResp'
+library(FishResp)
+# 3. Run the function import.info():
+TC3.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
+		       Mass = c(1.0, 1.0, 1.0, 1.0), 
+                       Volume = c(100, 100, 100, 100),
+                       DO.unit = "mg/L")
+# 4. Run the function import.meas() with the 'FishResp_multinight.txt' file:
+TC3.meas.data <- import.meas(file = "data/FishResp_multinight.txt",
+                             info.data = TC3.info,
+                             logger = "FishResp",
+                             n.chamber = 4,
+                             date.format = "DMY",
+                             plot.temperature = TRUE,
+                             plot.oxygen = TRUE)
+# 5. Check visually that the plots have actual data for Temperature and DO (manual)
+# 6. Extract dimensions of the 'TC3.meas.data' dataset into the object 'TC3_output':
+TC3.output <- dim(TC3.meas.data)
+
+# EXIT CRITERIA
+# if TRUE, then PASSED:
+all(TC3.output == c(101100, 16))
+# else: FAILED
+
+# TEAR DOWN:
+# close R
+q(save = "no")

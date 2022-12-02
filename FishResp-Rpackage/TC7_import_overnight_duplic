@@ -10,12 +10,12 @@
 # ENVIRONMENT SETUP:
 # 1. R, version > 4.0.0
 # 2. R package 'FishResp', !!! the version under test !!!
-# 3. The 'FishResp_overnight_duplic.txt' file containing duplicated lines:
-#	Date&Time in M101 - time duplication in beginning (2-3 sec)
-#	Date&Time in M102 - time duplication in middle (2-3 sec)
-#	Date&Time in M103 - time duplication in end (2-3 sec)
-#	Date&Time in M104 - time duplication (30 sec)
-#	Date&Time in M105 - time duplication in the whole phase
+# 3. The 'FishResp_overnight_duplic.txt' file containing duplicated time values:
+#	Date&Time in M101 - 2 time duplications in beginning
+#	Date&Time in M102 - 2 time duplications in middle
+#	Date&Time in M103 - 2 time duplications in end
+#	Date&Time in M104 - 29 time duplications
+#	Date&Time in M105 - time duplications in the whole phase
 #
 # TEST EXECUTION:
 # 1. Open R
