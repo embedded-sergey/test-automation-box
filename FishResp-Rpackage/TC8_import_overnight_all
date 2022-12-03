@@ -3,9 +3,10 @@
 ##################################################################
 #
 # DESCRIPTION: 
-# The import.meas() function should be able to work with duplicated lines and
-# in the input data. To test it, the 'FishResp_overnight_all.txt' file is 
-# used containing duplicated lines.
+# The import.meas() function should be able to work with all the issues: 
+# NAs, no lines and duplicated lines in the input data. To test it, the 
+# 'FishResp_overnight_all.txt' file is used containing all the issues
+# overnight.
 #
 # ENVIRONMENT SETUP:
 # 1. R, version > 4.0.0
@@ -29,7 +30,7 @@
 #	Date&Time in M105 - time duplications in the whole phase
 #   The combination of issues in M111:
 #     - Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M111 - 10 NA
-#     - all columns in M111 - 5 absent lines inside NA lines
+#     - all columns in M111 - 5 absent lines removing 5 NA lines
 #     - Date&Time in M111 - 29 time duplications, where both above-mentioned
 #       issues are presented as well.
 #
@@ -56,7 +57,7 @@ TC8.output <- dim(TC8.meas.data)
 
 # EXIT CRITERIA
 # if TRUE, then PASSED:
-all(TC8.output == c(47100, 16)) && !any(duplicated(TC8.meas.data$Date.Time))
+all(TC8.output == c(46490, 16)) && !any(duplicated(TC8.meas.data$Date.Time))
 # else: FAILED
 
 # TEAR DOWN:

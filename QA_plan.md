@@ -8,8 +8,8 @@ TC4: Selected multinight input for import.meas() ✅
 TC5: Overnight input with NA for import.meas() ✅
 TC6: Overnight input with missed lines/phases for import.meas() ✅
 TC7: Overnight input with time duplications for import.meas() ✅
-TC8: Overnight input with NA, missed lines & duplications for import.meas()
-TC9: Multinight input with NA, missed lines & duplications for import.meas() 
+TC8: Overnight input with all issues for import.meas() ✅
+TC9: Multinight input with all issues for import.meas()
 
 ### TEST_SUITE_2: time & date format issues in import.meas()
 ...
