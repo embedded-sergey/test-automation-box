@@ -1,0 +1,86 @@
+###################################################################
+# TEST CASE 8: Multinight input with all issues for import.meas() #
+###################################################################
+#
+# DESCRIPTION: 
+# The import.meas() function should be able to work with all the issues: 
+# NAs, no lines and duplicated lines in the input data. To test it, the 
+# 'FishResp_overnight_all.txt' file is used containing all the issues
+# multinight.
+#
+# ENVIRONMENT SETUP:
+# 1. R, version > 4.0.0
+# 2. R package 'FishResp', !!! the version under test !!!
+# 3. The 'FishResp_overnight_all.txt' file containing duplicated lines:
+#	Ox.1 in M1 - all data NA
+# 	Temp.2 in M2 - all data NA
+#	Ox.3 in M3 - 10 NA in beginning, 10 NA in middle, 10 NA in end
+#	Temp.4 in M4 - 10 NA in beginning, 10 NA in middle, 10 NA in end
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M5 - 10 NA
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M6 - all NA
+#	all columns in M7 - 10 absent lines in beginning, 10 in middle & 10 in end
+#	all columns in M8 - all lines are absent
+#	all columns in M9 - one line is presented
+#	all columns in M10 - two lines are presented
+#	all columns in M100 - all lines are absent overnight
+#	Date&Time in M101 - 2 time duplications in beginning
+#	Date&Time in M102 - 2 time duplications in middle
+#	Date&Time in M103 - 2 time duplications in end
+#	Date&Time in M104 - 29 time duplications
+#	Date&Time in M105 - time duplications in the whole phase
+#   The combination of issues in M111:
+#     - Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M111 - 10 NA
+#     - all columns in M111 - 5 absent lines removing 5 NA lines
+#     - Date&Time in M111 - 29 time duplications, where both above-mentioned
+#       issues are presented as well.
+#   Ox.1 in M2001 - all data NA
+# 	Temp.2 in M2002 - all data NA
+#	Ox.3 in M2003 - 10 NA in beginning, 10 NA in middle, 10 NA in end
+#	Temp.4 in M2004 - 10 NA in beginning, 10 NA in middle, 10 NA in end
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M2005 - 10 NA
+#	Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M2006 - all NA
+#	all columns in M2007 - 10 absent lines in beginning, 10 in middle & 10 in end
+#	all columns in M2008 - all lines are absent
+#	all columns in M2009 - one line is presented
+#	all columns in M20010 - two lines are presented
+#	all columns in M200100 - all lines are absent overnight
+#	Date&Time in M200101 - 2 time duplications in beginning
+#	Date&Time in M200102 - 2 time duplications in middle
+#	Date&Time in M200103 - 2 time duplications in end
+#	Date&Time in M200104 - 29 time duplications
+#	Date&Time in M200105 - time duplications in the whole phase
+#   The combination of issues in M200111:
+#     - Temp.1, Ox.1, Temp.2, Ox.2, Temp.3, Ox.3, Temp.4, Ox.4 in M200111 - 10 NA
+#     - all columns in M200111 - 5 absent lines removing 5 NA lines
+#     - Date&Time in M200111 - 29 time duplications, where both above-mentioned
+#       issues are presented as well.
+#
+# TEST EXECUTION:
+# 1. Open R
+# 2. Load the library under test 'FishResp'
+library(FishResp)
+# 3. Run the function import.info():
+TC8.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
+		       Mass = c(1.0, 1.0, 1.0, 1.0), 
+                       Volume = c(100, 100, 100, 100),
+                       DO.unit = 'mg/L')
+# 4. Run the function import.meas() with the 'FishResp_overnight_all.txt' file:
+TC8.meas.data <- import.meas(file = "data/FishResp_overnight_all.txt",
+                             info.data = TC8.info,
+                             logger = "FishResp",
+                             n.chamber = 4,
+                             date.format = "DMY",
+                             plot.temperature = TRUE,
+                             plot.oxygen = TRUE)
+# 5. Check visually that the plots have actual data for Temperature and DO (manual)
+# 6. Extract dimensions of the 'TC8.meas.data' dataset into the object 'TC8_output':
+TC8.output <- dim(TC8.meas.data)
+
+# EXIT CRITERIA
+# if TRUE, then PASSED:
+all(TC8.output == c(46490, 16)) && !any(duplicated(TC8.meas.data$Date.Time))
+# else: FAILED
+
+# TEAR DOWN:
+# close R
+q(save = "no")
