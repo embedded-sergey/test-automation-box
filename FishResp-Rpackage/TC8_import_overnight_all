@@ -39,13 +39,13 @@
 # 2. Load the library under test 'FishResp'
 library(FishResp)
 # 3. Run the function import.info():
-TC8.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
-		       Mass = c(1.0, 1.0, 1.0, 1.0), 
-                       Volume = c(100, 100, 100, 100),
-                       DO.unit = 'mg/L')
+TC.info <- input.info(ID = c('Fish_1', 'Fish_2', 'Fish_3', 'Fish_4'),
+		              Mass = c(1.0, 1.0, 1.0, 1.0), 
+                      Volume = c(100, 100, 100, 100),
+                      DO.unit = 'mg/L')
 # 4. Run the function import.meas() with the 'FishResp_overnight_all.txt' file:
 TC8.meas.data <- import.meas(file = "data/FishResp_overnight_all.txt",
-                             info.data = TC8.info,
+                             info.data = TC.info,
                              logger = "FishResp",
                              n.chamber = 4,
                              date.format = "DMY",
